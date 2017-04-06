@@ -5,11 +5,13 @@ import {AngularFire, AuthProviders, AuthMethods, FirebaseListObservable} from 'a
 export class AF {
   public messages: FirebaseListObservable<any>;
   public users: FirebaseListObservable<any>;
-  public displayName: string;
-  public email: string;
+  public registeredUsers: FirebaseListObservable<any>;
+  public displayName: any;
+  public email: any;
 
   constructor(public af: AngularFire) {
     this.messages = this.af.database.list('messages');
+    this.registeredUsers = this.af.database.list('registeredUsers');
   }
 
   /**
@@ -67,12 +69,27 @@ export class AF {
    * @returns {firebase.Promise<void>}
    */
    saveUserInfoFromForm(uid, name, email) {
+     console.log("Save user information");
      return this.af.database.object('registeredUsers/' + uid).set({
-       name: name,
+       displayName: name,
        email: email,
      });
    }
 
+   getUserName(uid: string) {
+     let userObject = this.af.database.object('registeredUsers/' + uid);
+     userObject.subscribe(snapshot => {
+       console.log("snapshot:");
+       console.log(snapshot);
+      let name: string = snapshot.displayName;
+      console.log(name);
+      return name;
+  });
+   }
+
+   getUserEmail() {
+     return this.af.database.object('email');
+   }
 
    /**
    * Logs the user in using their Email/Password combo
