@@ -12,6 +12,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { AF } from './providers/af';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { RegistrationPageComponent } from './registration-page/registration-page.component';
 
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
@@ -24,7 +25,8 @@ export const firebaseConfig = {
   declarations: [
     AppComponent,
     IndexComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    RegistrationPageComponent
   ],
   imports: [
     BrowserModule,
