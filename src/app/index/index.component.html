@@ -1,3 +1,33 @@
-<sebm-google-map [latitude]="45.5206223" [longitude]="-122.6795871" [zoom]='15'>
-  <sebm-google-map-marker [latitude]="lat" [longitude]="lng" [iconUrl]='mario'></sebm-google-map-marker>
-</sebm-google-map>
+<div class='container'>
+  <sebm-google-map [latitude]="45.5206223" [longitude]="-122.6795871" [zoom]='15'>
+    <sebm-google-map-marker [latitude]="lat" [longitude]="lng" [iconUrl]='mario'></sebm-google-map-marker>
+  </sebm-google-map>
+
+
+  <div class='row'>
+    <div class="col-md-8 col-md-offset-2">
+      <div class="bs-example" id="messages">
+
+        <div #scrollMe class="bs-example" id="messages">
+          <!-- display messages -->
+          <div *ngFor="let message of messages | async">
+            <div class="bubble" [class.you]="isYou(message.email)" [class.me]="isMe(message.email)">
+              <p>{{ message.message }}</p>
+              <div class="author">
+                {{message.displayName}} | {{ message.timestamp | date:"MM/dd/yy hh:mm a" }}
+              </div>
+            </div>
+          </div>
+          <!-- display messages end -->
+        </div>
+
+      </div>
+
+      <figure class="highlight">
+        <input type="textarea" class="message-text" [(ngModel)]="newMessage" (keyup.enter)="sendMessage()">
+        <a class="send-message" (click)="sendMessage()">SEND</a>
+      </figure>
+
+    </div>
+  </div>
+</div>
