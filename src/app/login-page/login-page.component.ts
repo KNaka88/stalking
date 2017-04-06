@@ -8,10 +8,25 @@ import {Router} from "@angular/router";
   styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent implements OnInit {
+  public error: any;
+
 
   constructor(public afService: AF, private router: Router) { }
+  login(e, email, password) {
 
-  login() {
+    this.afService.login(email, password).then((data) => {
+      this.router.navigate(['']);
+    })
+    .catch((error: any) => {
+        if (error) {
+          this.error = error;
+          console.log(this.error);
+        }
+      });
+  }
+
+
+  loginGoogle() {
     this.afService.loginWithGoogle().then((data) => {
       // Send them to the homepage if they are logged in
       this.router.navigate(['']);

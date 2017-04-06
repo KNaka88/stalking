@@ -1,6 +1,15 @@
 <div class="modal-dialog">
   <div class="loginmodal-container">
     <h1>Login to Your Account</h1><br>
-    <button class="login loginmodal-submit" (click)="login()">Login With Google</button>
+    <form class="form-signin" (submit)="login($event, email.value, password.value)">
+      <label for="email" class="sr-only">Email address</label>
+      <input #email type="email" id="email" class="form-control" placeholder="Email address" required="" autofocus="">
+
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input #password type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+      <br>
+      <button class="btn btn-md btn-primary btn-block" type="submit">Login</button>
+    </form>
+    <button class="login loginmodal-submit" (click)="loginGoogle()">Login With Google</button>
   </div>
 </div>

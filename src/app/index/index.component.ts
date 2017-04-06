@@ -74,6 +74,9 @@ export class IndexComponent implements OnInit, AfterViewChecked {
       return true;
     }
   }
+  logout(){
+    this.afService.logout();
+  }
 
 
 

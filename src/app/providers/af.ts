@@ -25,6 +25,20 @@ export class AF {
     });
   }
 
+  login(email, password) {
+    console.log(email);
+    console.log(password);
+    return this.af.auth.login(
+    {
+      email: email,
+      password: password,
+    },
+    {
+      provider: AuthProviders.Password,
+      method: AuthMethods.Password,
+    });
+  }
+
   /**
    * Logs out the current user
    */
