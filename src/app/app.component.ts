@@ -29,11 +29,11 @@ export class AppComponent {
             this.afService.displayName = auth.google.displayName;
             this.afService.email = auth.google.email;
           } else {
+            this.afService.displayName = afService.getUserName(auth.uid).subscribe( (userObject) => {
+              this.afService.displayName = userObject.displayName;
+              console.log(this.afService.displayName);
+            });
 
-            this.afService.displayName = auth.auth.email;
-            // this.afService.displayName = afService.getUserName(auth.uid);
-            console.log('checking...');
-            console.log(this.afService.displayName)
             this.afService.email = auth.auth.email;
 
             this.isLoggedIn = true;

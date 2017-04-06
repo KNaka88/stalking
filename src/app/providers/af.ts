@@ -38,14 +38,15 @@ export class AF {
  */
 
  sendMessage(text) {
-   let message = {
-     message: text,
-     displayName: this.displayName,
-     email: this.email,
-     timestamp: Date.now()
-   };
-   console.log(message);
-   this.messages.push(message);
+
+     let message = {
+       message: text,
+       displayName: this.displayName,
+       email: this.email,
+       timestamp: Date.now()
+     };
+     console.log(message.displayName);
+     this.messages.push(message);
  }
 
 
@@ -77,14 +78,7 @@ export class AF {
    }
 
    getUserName(uid: string) {
-     let userObject = this.af.database.object('registeredUsers/' + uid);
-     userObject.subscribe(snapshot => {
-       console.log("snapshot:");
-       console.log(snapshot);
-      let name: string = snapshot.displayName;
-      console.log(name);
-      return name;
-  });
+     return this.af.database.object('registeredUsers/' + uid);
    }
 
    getUserEmail() {
