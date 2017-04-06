@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AF } from './providers/af';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,28 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title: string = 'My first angular2-google-maps project';
+  public isLoggedIn: boolean;
+
+  constructor(public afService: AF, private router: Router) {
+    // This asynchronously checks if our user is logged it and will automatically
+    // redirect them to the Login page when the status changes.
+    // This is just a small thing that Firebase does that makes it easy to use.
+  this.afService.af.auth.subscribe(
+    (auth) => {
+        if (auth === null) {
+          console.log('Not Logged in');
+          this.router.navigate(['login']);
+          this.isLoggedIn = false;
+        } else {
+          console.log('successfully logged in');
+          this.isLoggedIn = true;
+          this.router.navigate(['']);
+        }
+      }
+    );
+  }
+
+  logout() {
+    this.afService.logout();
+  }
 }
