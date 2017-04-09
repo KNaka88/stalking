@@ -32,6 +32,7 @@ export class IndexComponent implements OnInit, AfterViewChecked {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((location) => {
           this.setLatLng(location.coords.latitude, location.coords.longitude);
+          this.updateUserLocation();
       });
     }
   }
@@ -56,6 +57,12 @@ export class IndexComponent implements OnInit, AfterViewChecked {
   setLatLng (lat: number, lng: number) {
     this.lat = lat;
     this.lng = lng;
+  }
+
+  updateUserLocation() {
+    let lat = this.lat;
+    let lng = this.lng;
+    this.afService.updateUserLocation(lat, lng);
   }
 
 

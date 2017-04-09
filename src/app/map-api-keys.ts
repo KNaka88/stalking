@@ -1,1 +1,1 @@
-export var mapKey = "YOUR-API-KEY";
+export var mapKey = "";
